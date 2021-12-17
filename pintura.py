@@ -1,0 +1,8 @@
+def prRed(texto): print("\033[91m{}\033[00m" .format(texto), end = "")
+def prGreen(texto): print("\033[92m{}\033[00m" .format(texto), end = "")
+def prYellow(texto): print("\033[93m{}\033[00m" .format(texto), end = "")
+def prLightPurple(texto): print("\033[94m{}\033[00m" .format(texto), end = "")
+def prPurple(texto): print("\033[95m{}\033[00m" .format(texto), end = "")
+def prCyan(texto): print("\033[96m{}\033[00m" .format(texto), end = "")
+def prLightGray(texto): print("\033[97m{}\033[00m" .format(texto), end = "")
+def prBlack(texto): print("\033[98m{}\033[00m" .format(texto), end = "")

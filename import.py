@@ -2,6 +2,8 @@ import sys
 import csv
 from RN412 import calculo_rn412
 import pandas as pd
+from pintura import *
+
 
 
 
@@ -21,7 +23,7 @@ def analise_individual():
         dt_cancelamento = input('Informe a data de cancalemnto ##/##/####: ')
         ultimo_mes_faturamento = input('Informe a ultima competencia faturada ##/####: ')
 
-    return print(calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento))
+    return prLightPurple(calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento))
 
 def analise_lote():
     if(len(sys.argv) == 3):
@@ -45,7 +47,7 @@ def analise_lote():
         nome = linhas [0] 
         objeto_gravacao.writerow((nome,calculo))   
     arquivo_retorno.close()
-    print('Processo concluido')
+    prLightPurple('Processo concluido')
 
 
 def rodando_usuario():
@@ -66,13 +68,18 @@ def rodando_usuario():
         analise_lote()
 
 
+
 if(len(sys.argv)<2):
     rodando_usuario()
 
 elif(sys.argv[1] == '--help'):
-    print('Para utilizar o programa através de parametros inputados diretamente no console voce tem duas opções: ')
-    print('1) Indidual - com isso os parametros são mensalidade(####.##), vigencia(##), dt_cancelamento(##/##/####) e ultimo_mes_faturamento(##/####)')
-    print('2) Lote - com isso os parametros são diretorio/nome_arquivo.csv e diretorio_retorno/nome_arquivo_retorno.csv ')
+    prCyan('Para utilizar o programa através de parametros inputados diretamente no console voce tem duas opções: \n')
+    prGreen('1) Lote - com isso os parametros são ');prRed('<diretorio/nome_arquivo.csv> '); prGreen('e '); prRed('<diretorio_retorno/nome_arquivo_retorno.csv>\n')
+    prGreen('2) Indidual - com isso os parametros são: \n')
+    prRed('<mensalidade(####.##)>');prGreen(', ');prRed('<vigencia(##)>');prGreen(', ');prRed(' <dt_cancelamento(##/##/####)>');prGreen(' e ');prRed('<ultimo_mes_faturamento(##/####)>\n')
+
+
+
 
 elif(len(sys.argv) == 3):
     analise_lote()
@@ -81,4 +88,4 @@ elif(len(sys.argv) == 5):
     analise_individual()
 
 else:
-    print('Parametros invalidos, consulte --help')
+    prYellow('Parametros invalidos, consulte --help  \n')
