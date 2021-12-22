@@ -1,9 +1,10 @@
 import sys
 import csv
-from RN412 import calculo_rn412
+import datetime
 import pandas as pd
+from RN412 import calculo_rn412
 from pintura import *
-
+from datetime import datetime
 
 
 
@@ -18,11 +19,32 @@ def analise_individual():
         dt_cancelamento = sys.argv[3]
         ultimo_mes_faturamento = sys.argv[4]
     else:
-        mensalidade = float(input('Informe o valor da mensalidade R$####.##: '))
-        vigencia = int(input('Informe a vigencia: '))
-        dt_cancelamento = input('Informe a data de cancalemnto ##/##/####: ')
-        ultimo_mes_faturamento = input('Informe a ultima competencia faturada ##/####: ')
 
+        while True:
+            try:
+                mensalidade = float(input('Informe o valor da mensalidade R$####.##: '))
+                vigencia = int(input('Informe a vigencia: '))
+                break
+            except (NameError, ValueError):
+                prRed('Campo mensalidade tem que ser um numero e caso seja decimal o separador é . (ponto)\n')
+                prRed('Campo vigencia tem que ser um numero inteiro\n')
+                prRed('Tente novamente\n')
+        while True:
+            try:
+                dt_cancelamento = input('Informe a data de cancalemnto ##/##/####: ')
+                conversao_data_cancelamento = datetime.strptime(dt_cancelamento, '%d/%m/%Y')
+                ultimo_mes_faturamento = input('Informe a ultima competencia faturada ##/####: ')
+                consersao_ultimo_mes_faturamento = datetime.strptime(ultimo_mes_faturamento, '%m/%Y')
+                break
+            
+            except (NameError, ValueError):
+            
+                prRed('Campo data de cancelamento tem que ser uma data com dia/mês/ano \n')
+                prRed('Campo ultima competencia tem que ser uma data com mês/ano\n')
+                prRed('Tente novamente\n')
+            
+
+    
     return prLightPurple(calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento))
 
 def analise_lote():
@@ -60,7 +82,7 @@ def rodando_usuario():
             tipo_analise = input('Deseja calcular individual (I) ou em lote (L): ').upper()
             erro += 1
         else:
-            print('Entrada incorreta')
+            prRed('Entrada incorreta')
             tipo_analise = input('Deseja calcular individual (I) ou em lote (L): ').upper()
     if(tipo_analise == 'I'):
         analise_individual()
