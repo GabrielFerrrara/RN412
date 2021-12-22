@@ -13,7 +13,6 @@ from dateutil.relativedelta import *
 
 def calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento):
 
-
     dt_cancelamento = datetime.strptime(dt_cancelamento, '%d/%m/%Y')
     #calculando quantidade de dias do mes referente a competencia do cancelamento
     if (dt_cancelamento.day < vigencia):
@@ -23,13 +22,11 @@ def calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento
         qnt_dias_mes_cancelamento = calendar.monthrange(dt_cancelamento.year, dt_cancelamento.month)[1]
 
 
-
     #data do primeiro dia a ser devolvido
     if (dt_cancelamento.day == qnt_dias_mes_cancelamento):
         dt_primeiro_dia_a_devolver = date(dt_cancelamento.year, dt_cancelamento.month+1, 1)
     else :
         dt_primeiro_dia_a_devolver = date(dt_cancelamento.year, dt_cancelamento.month, dt_cancelamento.day+1)
-
 
     #conversao para data ultimo faturamento, parametros de ultimos dias de vigencia do plano.
     dt_ultimo_mes_faturamento = datetime.strptime(ultimo_mes_faturamento, '%m/%Y')
@@ -87,32 +84,8 @@ def calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento
             conclusao = 'Valor a ser devolvido R${:.2f} referente a {} dia(s) proporcionais e {} mês(es) cheio(s)'.format(valor_total, qnt_dias_pro_rata, contagem_mes)  
 
     return conclusao        
-
-
-
-
-    
-
-
     
     
     
 
     
-
-
-# NOW WE DEFINE THE FILE TO SAVE OUTPUT INTO
-# WE USE THE "a" OPTION TO APPEND TO THE FILE
-# OTHERWISE EACH INPUT WOULD OVERWRITE THE
-# PREVIOUS INPUT
-
-###file = open(nome + ".txt", "a")
-
-# WE USE A NUMBER OF file.write STATEMENTS TO WRITE THE OUTPUT IN A FORMAT
-
-
-#file.write('Prezado(a),' + input1 + '\n')
-#file.write('Você utilizou ' + + 'dias da mensalidade. \n')
-#file.write('Valor a pagar: R$ ' + )
-#file.write("---" + "\n")
-#file.close()
