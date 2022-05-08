@@ -2,7 +2,7 @@ import sys
 import csv
 import datetime
 import pandas as pd
-from RN412 import calculo_rn412
+from RN412 import RN412
 from pintura import *
 from datetime import datetime
 
@@ -45,7 +45,7 @@ def analise_individual():
             
 
     
-    return prLightPurple(calculo_rn412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento))
+    return prLightPurple(str(RN412(mensalidade, vigencia, dt_cancelamento, ultimo_mes_faturamento)) + '\n')
 
 def analise_lote():
     if(len(sys.argv) == 3):
@@ -65,11 +65,11 @@ def analise_lote():
     objeto_gravacao = csv.writer(arquivo_retorno)
 
     for linhas in tuples:
-        calculo = calculo_rn412(linhas[1],linhas[2],linhas[3],linhas[4])
+        calculo = RN412(linhas[1],linhas[2],linhas[3],linhas[4])
         nome = linhas [0] 
-        objeto_gravacao.writerow((nome,calculo))   
+        objeto_gravacao.writerow((nome, calculo, calculo.getDias(), calculo.getMesCheio()))
     arquivo_retorno.close()
-    prLightPurple('Processo concluido')
+    prLightPurple('Processo concluido --> retorno com Nome, Valor, Dias, Meses Cheios')
 
 
 def rodando_usuario():
@@ -111,3 +111,4 @@ elif(len(sys.argv) == 5):
 
 else:
     prYellow('Parametros invalidos, consulte --help  \n')
+
