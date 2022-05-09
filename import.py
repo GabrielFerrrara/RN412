@@ -63,13 +63,14 @@ def analise_lote():
     arquivo_retorno = open(diretorio_retorno, 'w', newline='', encoding='iso8859-1')
 
     objeto_gravacao = csv.writer(arquivo_retorno)
+    objeto_gravacao.writerow(('Nome', 'Valor', 'Dias', 'Meses Cheios'))
 
     for linhas in tuples:
         calculo = RN412(linhas[1],linhas[2],linhas[3],linhas[4])
         nome = linhas [0] 
         objeto_gravacao.writerow((nome, calculo, calculo.getDias(), calculo.getMesCheio()))
     arquivo_retorno.close()
-    prLightPurple('Processo concluido --> retorno com Nome, Valor, Dias, Meses Cheios')
+    prLightPurple('Processo concluido \n')
 
 
 def rodando_usuario():
