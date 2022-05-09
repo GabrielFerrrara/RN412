@@ -65,9 +65,13 @@ class RN412(Mensalidade):
         return contagem
 
     def getMesCheio(self) -> int:
+        if(self.valor == 0):
+            return 0
         return self.meses
 
     def getDias(self) -> int:
+        if(self.valor == 0):
+            return 0
         return self.dias
 
            
